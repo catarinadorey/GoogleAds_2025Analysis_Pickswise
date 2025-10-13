@@ -44,10 +44,16 @@
             justify-content: center;
             align-items: center;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            gap: 20px; /* Space between logos */
         }
 
         header svg {
             height: 70px;
+            width: auto;
+        }
+
+        header .brand-logo-img {
+            height: 70px; /* Adjust as needed */
             width: auto;
         }
 
@@ -156,26 +162,7 @@
         }
         
         /* --- Buttons --- */
-        .btn {
-            display: inline-block;
-            background-color: var(--highlight-color);
-            color: var(--header-color);
-            font-family: 'Barlow', sans-serif;
-            text-transform: uppercase;
-            font-weight: 700;
-            padding: 0.8em 1.5em;
-            border-radius: 5px;
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
-            margin-top: 1em;
-        }
-
-        .btn:hover {
-            background-color: #1bcab5;
-            transform: translateY(-2px);
-        }
+        /* Removed .btn styles as buttons are removed */
 
         /* --- Layout --- */
         .grid-2-col {
@@ -267,13 +254,13 @@
             </g>
           </g>
         </svg>
+        <img src="cropped-cropped-Design-sem-nome.png" alt="Pickswise Logo" class="brand-logo-img">
     </header>
 
     <main class="container">
         <h1>Google Ads Performance Analysis <span class="highlight">– Pickswise</span></h1>
         
         <section id="summary">
-            <h2>Executive <span class="highlight">Summary</span></h2>
             <div class="card">
                 <p>The comparative analysis of the Google Ads account performance reveals a significant improvement in traffic acquisition efficiency at the beginning of October compared to September. However, this top-of-funnel efficiency has not translated into higher-value conversions, with conversion rates for Signups and First-Time Deposits (FTDs) remaining stagnant. The most critical issue is brand performance: Hard Rock Bet drives the majority of signups but has generated zero FTDs, whereas BetMGM shows a much stronger ability to convert users into depositors.</p>
             </div>
@@ -314,7 +301,7 @@
                             <tbody>
                                 <tr><td>Total Cost</td><td>$8,937.45</td><td>$3,938.68</td></tr>
                                 <tr><td>Impressions</td><td>42,458</td><td>9,327</td></tr>
-                                <tr><td>Clicks</td><td>3,495</td><td>1,315</td></tr>
+                                <tr><td>Cliques</td><td>3,495</td><td>1,315</td></tr>
                                 <tr><td>CTR</td><td>8.23%</td><td>14.10%</td></tr>
                                 <tr><td>LP Clicks (Conversions)</td><td>873.57</td><td>438.44</td></tr>
                                 <tr><td>Conv. Rate (LP Clicks)</td><td>24.99%</td><td>33.34%</td></tr>
@@ -325,7 +312,6 @@
                                 <tr><td>Cost per FTD (CPP)</td><td>$2,234.36</td><td>$1,969.35</td></tr>
                             </tbody>
                         </table>
-                        <button class="btn">Export to Sheets</button>
                     </div>
                     <div>
                         <canvas id="performanceChart"></canvas>
@@ -362,7 +348,6 @@
                             <tr><td>WV - Spins & Slots</td><td>$779.51</td><td>14.5</td><td>$53.77</td></tr>
                         </tbody>
                     </table>
-                     <button class="btn">Export to Sheets</button>
                 </div>
                 <div class="card">
                     <h3>October 2025 (1-12)</h3>
@@ -381,7 +366,6 @@
                            <tr><td>WV - Spins & Slots</td><td>$392.98</td><td>9</td><td>$43.67</td></tr>
                         </tbody>
                     </table>
-                     <button class="btn">Export to Sheets</button>
                 </div>
             </div>
             <div class="card">
@@ -417,7 +401,6 @@
                                 <tr><td>Bet365</td><td>October</td><td>0</td><td>0</td><td>N/A</td></tr>
                             </tbody>
                         </table>
-                         <button class="btn">Export to Sheets</button>
                     </div>
                     <div>
                         <canvas id="brandChart"></canvas>
