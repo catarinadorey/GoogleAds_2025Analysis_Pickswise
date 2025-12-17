@@ -1,149 +1,82 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marketing Performance Report</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        .gradient-bg { background: linear-gradient(135deg, #1a1c2c 0%, #4a192c 100%); }
-        .glass-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
-    </style>
-</head>
-<body class="bg-slate-900 text-slate-100 font-sans antialiased">
+<section class="mt-12">
+    <div class="flex items-center space-x-4 mb-6">
+        <div class="bg-emerald-600 p-2 rounded-lg"><i class="fas fa-table text-xl"></i></div>
+        <h2 class="text-2xl font-bold uppercase tracking-wider">Detailed Performance Table</h2>
+    </div>
 
-    <header class="p-8 text-center border-b border-slate-800">
-        <h1 class="text-4xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
-            Performance Marketing Report
-        </h1>
-        <p class="text-slate-400 mt-2 italic text-lg">Q4 Analysis & Strategy Overview</p>
-    </header>
-
-    <main class="max-w-7xl mx-auto p-6 space-y-16">
-
-        <section>
-            <div class="flex items-center space-x-4 mb-8">
-                <div class="bg-purple-600 p-3 rounded-lg"><i class="fas fa-dice-five text-2xl"></i></div>
-                <h2 class="text-3xl font-bold uppercase tracking-wider">Casino Performance</h2>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
-                <div class="glass-card p-6 rounded-xl">
-                    <p class="text-slate-400 text-sm uppercase">Total Impressions</p>
-                    <p class="text-3xl font-bold">81,208</p>
-                </div>
-                <div class="glass-card p-6 rounded-xl border-l-4 border-blue-500">
-                    <p class="text-slate-400 text-sm uppercase">Avg. CTR</p>
-                    <p class="text-3xl font-bold text-blue-400">13.49%</p>
-                </div>
-                <div class="glass-card p-6 rounded-xl border-l-4 border-green-500">
-                    <p class="text-slate-400 text-sm uppercase">Total Signups (Leads)</p>
-                    <p class="text-3xl font-bold text-green-400">194</p>
-                </div>
-                <div class="glass-card p-6 rounded-xl border-l-4 border-yellow-500">
-                    <p class="text-slate-400 text-sm uppercase">Total FTDs</p>
-                    <p class="text-3xl font-bold text-yellow-400">14</p>
-                </div>
-            </div>
-
-            <div class="space-y-6">
-                <div class="flex gap-6 border-l-2 border-slate-700 ml-4 pl-8 relative pb-8">
-                    <div class="absolute -left-[11px] top-0 w-5 h-5 bg-purple-500 rounded-full border-4 border-slate-900"></div>
-                    <div class="flex-1 bg-slate-800/50 p-6 rounded-xl">
-                        <h3 class="text-xl font-bold text-purple-400 mb-2">September: Launch & Expansion</h3>
-                        <p class="text-slate-300 leading-relaxed mb-4">
-                            Implementation of dual campaigns across MI, NJ, WV, and PA focusing on generic casino terms and slots/spins. Initial optimizations included pausing underperforming keywords and stabilizing CPA.
-                        </p>
-                        <div class="text-sm font-mono text-slate-400 flex gap-4">
-                            <span>Cost: $8,937.45</span> | <span>Clicks: 3,495</span> | <span>CPA: $2,234.36</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex gap-6 border-l-2 border-slate-700 ml-4 pl-8 relative pb-8">
-                    <div class="absolute -left-[11px] top-0 w-5 h-5 bg-purple-500 rounded-full border-4 border-slate-900"></div>
-                    <div class="flex-1 bg-slate-800/50 p-6 rounded-xl">
-                        <h3 class="text-xl font-bold text-purple-400 mb-2 text-green-400">October: Efficiency & Scaling</h3>
-                        <p class="text-slate-300 leading-relaxed mb-4">
-                            Paused WV campaigns due to low ROI. Scaled MI, NJ, and PA with new generic campaigns focusing on non-bonus intent users. Resulted in the <strong>highest conversion rate (34.97%)</strong> and 104 signups.
-                        </p>
-                        <div class="text-sm font-mono text-slate-400 flex gap-4">
-                            <span>Cost: $8,704.96</span> | <span>FTDs: 5</span> | <span>CTR: 14.90%</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex gap-6 border-l-2 border-slate-700 ml-4 pl-8 relative pb-8">
-                    <div class="absolute -left-[11px] top-0 w-5 h-5 bg-purple-500 rounded-full border-4 border-slate-900"></div>
-                    <div class="flex-1 bg-slate-800/50 p-6 rounded-xl">
-                        <h3 class="text-xl font-bold text-purple-400 mb-2 text-yellow-400">November: Strategic Shift</h3>
-                        <p class="text-slate-300 leading-relaxed mb-4">
-                            Budget consolidated to €300 daily. Pivoted away from "free spins" and "no deposit" keywords to test FTD quality. This led to a <strong>CPA reduction to $598.02</strong> (the lowest in the period).
-                        </p>
-                    </div>
-                </div>
-
-                <div class="flex gap-6 border-l-2 border-slate-700 ml-4 pl-8 relative">
-                    <div class="absolute -left-[11px] top-0 w-5 h-5 bg-purple-500 rounded-full border-4 border-slate-900"></div>
-                    <div class="flex-1 bg-slate-800/50 p-6 rounded-xl border border-purple-500/30">
-                        <h3 class="text-xl font-bold text-purple-400 mb-2">December: Lead Gen Innovation</h3>
-                        <p class="text-slate-300 leading-relaxed">
-                            Currently developing a dedicated <strong>Lead Gen Landing Page</strong>. Strategy involves capturing user contacts for multi-day email nurturing campaigns across all active states.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <hr class="border-slate-800">
-
-        <section>
-            <div class="flex items-center space-x-4 mb-8">
-                <div class="bg-blue-600 p-3 rounded-lg"><i class="fas fa-football-ball text-2xl"></i></div>
-                <h2 class="text-3xl font-bold uppercase tracking-wider text-blue-400">Sportsbook Performance</h2>
-            </div>
-
-            <div class="bg-blue-900/20 border border-blue-800/50 rounded-2xl p-8">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                    <div>
-                        <h3 class="text-2xl font-semibold mb-4">Current Status: Learning Phase</h3>
-                        <p class="text-slate-300 leading-relaxed">
-                            Launched three specialized campaigns targeting <strong>IN, MI, NJ, PA, TN, and VA</strong>.
-                        </p>
-                        <ul class="mt-4 space-y-3 text-slate-300">
-                            <li><i class="fas fa-check text-blue-500 mr-2"></i> <strong>Sports Generic:</strong> Broad reach.</li>
-                            <li><i class="fas fa-check text-blue-500 mr-2"></i> <strong>Welcome Bonus:</strong> Conversion focused.</li>
-                            <li><i class="fas fa-check text-blue-500 mr-2"></i> <strong>Top Sites & How-to:</strong> Educational intent.</li>
-                        </ul>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-slate-800 p-4 rounded-lg text-center">
-                            <p class="text-xs text-slate-400 uppercase">Impressions</p>
-                            <p class="text-2xl font-bold">956</p>
-                        </div>
-                        <div class="bg-slate-800 p-4 rounded-lg text-center">
-                            <p class="text-xs text-slate-400 uppercase">CTR</p>
-                            <p class="text-2xl font-bold">9.10%</p>
-                        </div>
-                        <div class="bg-slate-800 p-4 rounded-lg text-center">
-                            <p class="text-xs text-slate-400 uppercase">Cost</p>
-                            <p class="text-2xl font-bold">$418.71</p>
-                        </div>
-                        <div class="bg-slate-800 p-4 rounded-lg text-center">
-                            <p class="text-xs text-slate-400 uppercase">LP Clicks</p>
-                            <p class="text-2xl font-bold text-blue-400">2</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <footer class="p-12 text-center text-slate-500 text-sm">
-        Report generated for Client Presentation &bull; December 2025
-    </footer>
-
-</body>
-</html>
+    <div class="overflow-x-auto rounded-xl border border-slate-800">
+        <table class="w-full text-left border-collapse">
+            <thead>
+                <tr class="bg-slate-800/80 text-slate-300 text-xs uppercase tracking-widest">
+                    <th class="p-4 border-b border-slate-700">Category</th>
+                    <th class="p-4 border-b border-slate-700">Month</th>
+                    <th class="p-4 border-b border-slate-700 text-right">Impressions</th>
+                    <th class="p-4 border-b border-slate-700 text-right">CTR</th>
+                    <th class="p-4 border-b border-slate-700 text-right">Cost</th>
+                    <th class="p-4 border-b border-slate-700 text-right">Conv. Rate</th>
+                    <th class="p-4 border-b border-slate-700 text-right">Leads</th>
+                    <th class="p-4 border-b border-slate-700 text-right">FTDs</th>
+                    <th class="p-4 border-b border-slate-700 text-right">CPA</th>
+                </tr>
+            </thead>
+            <tbody class="text-sm divide-y divide-slate-800">
+                <tr class="hover:bg-slate-800/30 transition-colors">
+                    <td class="p-4 font-semibold text-purple-400">Casino</td>
+                    <td class="p-4 text-slate-300">September</td>
+                    <td class="p-4 text-right">42,458</td>
+                    <td class="p-4 text-right">8.23%</td>
+                    <td class="p-4 text-right font-mono">$8,937.45</td>
+                    <td class="p-4 text-right">24.99%</td>
+                    <td class="p-4 text-right">83</td>
+                    <td class="p-4 text-right font-bold">4</td>
+                    <td class="p-4 text-right font-mono text-slate-400">$2,234.36</td>
+                </tr>
+                <tr class="hover:bg-slate-800/30 transition-colors">
+                    <td class="p-4 font-semibold text-purple-400">Casino</td>
+                    <td class="p-4 text-slate-300">October</td>
+                    <td class="p-4 text-right">22,864</td>
+                    <td class="p-4 text-right font-bold text-blue-400">14.90%</td>
+                    <td class="p-4 text-right font-mono">$8,704.96</td>
+                    <td class="p-4 text-right font-bold text-green-400">34.97%</td>
+                    <td class="p-4 text-right font-bold text-green-400">104</td>
+                    <td class="p-4 text-right font-bold">5</td>
+                    <td class="p-4 text-right font-mono text-slate-400">$1,740.99</td>
+                </tr>
+                <tr class="hover:bg-slate-800/30 transition-colors">
+                    <td class="p-4 font-semibold text-purple-400">Casino</td>
+                    <td class="p-4 text-slate-300">November</td>
+                    <td class="p-4 text-right">6,394</td>
+                    <td class="p-4 text-right text-blue-400">16.28%</td>
+                    <td class="p-4 text-right font-mono">$2,392.09</td>
+                    <td class="p-4 text-right">18.25%</td>
+                    <td class="p-4 text-right">2</td>
+                    <td class="p-4 text-right font-bold">4</td>
+                    <td class="p-4 text-right font-mono font-bold text-green-400">$598.02</td>
+                </tr>
+                <tr class="hover:bg-slate-800/30 transition-colors">
+                    <td class="p-4 font-semibold text-purple-400">Casino</td>
+                    <td class="p-4 text-slate-300">December</td>
+                    <td class="p-4 text-right">9,492</td>
+                    <td class="p-4 text-right">14.55%</td>
+                    <td class="p-4 text-right font-mono">$4,240.67</td>
+                    <td class="p-4 text-right">19.48%</td>
+                    <td class="p-4 text-right">5</td>
+                    <td class="p-4 text-right font-bold">1</td>
+                    <td class="p-4 text-right font-mono text-slate-400">$4,240.67</td>
+                </tr>
+                <tr class="bg-blue-900/10 hover:bg-blue-900/20 transition-colors">
+                    <td class="p-4 font-semibold text-blue-400">Sportsbook</td>
+                    <td class="p-4 text-slate-300">December</td>
+                    <td class="p-4 text-right italic text-slate-500">956</td>
+                    <td class="p-4 text-right italic text-slate-500">9.10%</td>
+                    <td class="p-4 text-right font-mono italic text-slate-500">$418.71</td>
+                    <td class="p-4 text-right italic text-slate-500">2.30%</td>
+                    <td class="p-4 text-right italic text-slate-500">0</td>
+                    <td class="p-4 text-right font-bold italic text-slate-500">0</td>
+                    <td class="p-4 text-right font-mono italic text-slate-500">—</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <p class="mt-4 text-xs text-slate-500 italic">* Highlighted values represent peak performance for the period.</p>
+</section>
