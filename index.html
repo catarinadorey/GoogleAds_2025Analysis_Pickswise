@@ -9,6 +9,8 @@
     <style>
         .gradient-bg { background: linear-gradient(135deg, #1a1c2c 0%, #4a192c 100%); }
         .glass-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        /* Estilo para scroll horizontal em tabelas no mobile */
+        .table-container { overflow-x: auto; }
     </style>
 </head>
 <body class="bg-slate-900 text-slate-100 font-sans antialiased">
@@ -135,6 +137,113 @@
                             <p class="text-2xl font-bold text-blue-400">2</p>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="border-slate-800">
+
+        <section>
+            <div class="flex items-center space-x-4 mb-8">
+                <div class="bg-slate-700 p-3 rounded-lg"><i class="fas fa-table text-2xl"></i></div>
+                <h2 class="text-3xl font-bold uppercase tracking-wider">Detailed Data Log</h2>
+            </div>
+
+            <div class="glass-card rounded-2xl overflow-hidden">
+                <div class="table-container">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-800/50 text-slate-400 uppercase text-xs tracking-widest">
+                                <th class="p-4 border-b border-slate-700">Month</th>
+                                <th class="p-4 border-b border-slate-700">Impressions</th>
+                                <th class="p-4 border-b border-slate-700">Clicks</th>
+                                <th class="p-4 border-b border-slate-700">CTR</th>
+                                <th class="p-4 border-b border-slate-700">Cost</th>
+                                <th class="p-4 border-b border-slate-700">LP Clicks</th>
+                                <th class="p-4 border-b border-slate-700">Conv. Rate</th>
+                                <th class="p-4 border-b border-slate-700">Signups</th>
+                                <th class="p-4 border-b border-slate-700">CPL</th>
+                                <th class="p-4 border-b border-slate-700">FTDs</th>
+                                <th class="p-4 border-b border-slate-700">CPA</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm font-mono">
+                            <tr class="bg-purple-900/20">
+                                <td colspan="11" class="p-2 pl-4 text-xs font-bold uppercase text-purple-400 tracking-widest border-b border-slate-700/50">Casino</td>
+                            </tr>
+                            <tr class="border-b border-slate-800 hover:bg-white/5 transition-colors">
+                                <td class="p-4 text-slate-100 font-sans">Setembro</td>
+                                <td class="p-4">42,458</td>
+                                <td class="p-4">3,495</td>
+                                <td class="p-4">8.23%</td>
+                                <td class="p-4">$8,937.45</td>
+                                <td class="p-4">874</td>
+                                <td class="p-4">24.99%</td>
+                                <td class="p-4">83</td>
+                                <td class="p-4">$107.68</td>
+                                <td class="p-4">4</td>
+                                <td class="p-4">$2,234.36</td>
+                            </tr>
+                            <tr class="border-b border-slate-800 hover:bg-white/5 transition-colors">
+                                <td class="p-4 text-slate-100 font-sans">Outubro</td>
+                                <td class="p-4">22,864</td>
+                                <td class="p-4">3,407</td>
+                                <td class="p-4">14.90%</td>
+                                <td class="p-4">$8,704.96</td>
+                                <td class="p-4">1,191</td>
+                                <td class="p-4">34.97%</td>
+                                <td class="p-4">104</td>
+                                <td class="p-4">$83.70</td>
+                                <td class="p-4">5</td>
+                                <td class="p-4">$1,740.99</td>
+                            </tr>
+                            <tr class="border-b border-slate-800 hover:bg-white/5 transition-colors">
+                                <td class="p-4 text-slate-100 font-sans">Novembro</td>
+                                <td class="p-4">6,394</td>
+                                <td class="p-4">1,041</td>
+                                <td class="p-4">16.28%</td>
+                                <td class="p-4">$2,392.09</td>
+                                <td class="p-4">190</td>
+                                <td class="p-4">18.25%</td>
+                                <td class="p-4">2</td>
+                                <td class="p-4">$1,196.05</td>
+                                <td class="p-4">4</td>
+                                <td class="p-4">$598.02</td>
+                            </tr>
+                            <tr class="border-b border-slate-800 hover:bg-white/5 transition-colors">
+                                <td class="p-4 text-slate-100 font-sans italic">Dezembro*</td>
+                                <td class="p-4">9,492</td>
+                                <td class="p-4">1,381</td>
+                                <td class="p-4">14.55%</td>
+                                <td class="p-4">$4,240.67</td>
+                                <td class="p-4">269</td>
+                                <td class="p-4">19.48%</td>
+                                <td class="p-4">5</td>
+                                <td class="p-4">$848.13</td>
+                                <td class="p-4">1</td>
+                                <td class="p-4">$4,240.67</td>
+                            </tr>
+                            <tr class="bg-blue-900/20">
+                                <td colspan="11" class="p-2 pl-4 text-xs font-bold uppercase text-blue-400 tracking-widest border-b border-slate-700/50">Sportsbook</td>
+                            </tr>
+                            <tr class="hover:bg-white/5 transition-colors">
+                                <td class="p-4 text-slate-100 font-sans italic">Dezembro*</td>
+                                <td class="p-4">956</td>
+                                <td class="p-4">87</td>
+                                <td class="p-4">9.10%</td>
+                                <td class="p-4">$418.71</td>
+                                <td class="p-4">2</td>
+                                <td class="p-4">2.30%</td>
+                                <td class="p-4">0</td>
+                                <td class="p-4">-</td>
+                                <td class="p-4">0</td>
+                                <td class="p-4">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="p-4 bg-slate-800/30 text-xs text-slate-400 italic">
+                    * Nota: Os dados de Dezembro referem-se apenas aos primeiros 15 dias do mês.
                 </div>
             </div>
         </section>
