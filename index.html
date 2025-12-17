@@ -9,153 +9,182 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
         body { font-family: 'Inter', sans-serif; }
-        .glass-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .gradient-text { background: linear-gradient(to right, #60a5fa, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     </style>
 </head>
 <body class="bg-[#0f172a] text-slate-200 min-h-screen pb-20">
 
-    <header class="max-w-7xl mx-auto px-6 py-12 border-b border-slate-800 flex justify-between items-center">
+    <header class="max-w-7xl mx-auto px-6 py-12 border-b border-slate-800 flex justify-between items-end">
         <div>
-            <h1 class="text-3xl font-bold tracking-tight text-white">Performance Marketing Report</h1>
-            <p class="text-slate-400 mt-1 font-light italic">Reporting Period: September 1st — December 15th, 2025</p>
+            <h1 class="text-4xl font-extrabold gradient-text">Performance Report</h1>
+            <p class="text-slate-400 mt-2 font-light">Comprehensive Analysis: Sept 1st — Dec 15th, 2025</p>
         </div>
-        <div class="bg-slate-800/50 px-4 py-2 rounded border border-slate-700 text-xs font-mono text-slate-400">
-            INTERNAL DOCUMENT: Q4 DATA
+        <div class="text-right">
+            <span class="bg-amber-500/10 text-amber-500 px-4 py-2 rounded-full border border-amber-500/20 text-sm font-semibold uppercase">
+                <i class="fas fa-clock mr-2"></i> December: First 15 Days
+            </span>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-6 mt-12 space-y-16">
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <section class="space-y-6">
-                <div class="flex items-center space-x-3 border-b border-purple-500/30 pb-4">
-                    <i class="fas fa-dice text-purple-400 text-xl"></i>
-                    <h2 class="text-2xl font-bold text-white uppercase tracking-wide">Casino Strategy</h2>
-                </div>
-                <div class="space-y-4 text-sm text-slate-400 leading-relaxed">
-                    <p><strong class="text-slate-200 uppercase">September:</strong> Launch of dual campaigns per state (MI, NJ, WV, PA) targeting Generic Casino and Slots/Spins. Optimization focused on pausing low-performing keywords and CPA stabilization.</p>
-                    <p><strong class="text-slate-200 uppercase">October:</strong> Paused WV due to high spend without returns. Expanded MI, NJ, and PA with new Generic terms, excluding focus on welcome bonuses/free spins to improve intent.</p>
-                    <p><strong class="text-slate-200 uppercase">November:</strong> Consolidated daily budget to €300. Paused "Free Spins" and "No Deposit Bonus" keywords to test FTD conversion quality over volume.</p>
-                    <p><strong class="text-slate-200 uppercase text-blue-400">December (1-15):</strong> Transitioning to a Lead Gen strategy with a dedicated Landing Page. Implementation of automated email CRM sequences to be tested across all states.</p>
-                </div>
-            </section>
-
-            <section class="space-y-6">
-                <div class="flex items-center space-x-3 border-b border-blue-500/30 pb-4">
-                    <i class="fas fa-football-ball text-blue-400 text-xl"></i>
-                    <h2 class="text-2xl font-bold text-white uppercase tracking-wide">Sportsbook Strategy</h2>
-                </div>
-                <div class="space-y-4 text-sm text-slate-400 leading-relaxed">
-                    <p><strong class="text-slate-200 uppercase">December (1-15):</strong> Launch of three distinct campaign types: 
-                        <ul class="list-disc pl-5 space-y-2 mt-2">
-                            <li>Sports Generic</li>
-                            <li>Welcome Bonus Intent</li>
-                            <li>Top Sites & How-To Guides</li>
-                        </ul>
-                    </p>
-                    <p class="bg-blue-900/10 p-4 border border-blue-800/30 rounded-lg italic">
-                        Targeting Indiana, Michigan, New Jersey, Pennsylvania, Tennessee, and Virginia. Currently in the <strong>Learning Phase</strong> to establish performance baselines.
-                    </p>
-                </div>
-            </section>
-        </div>
+    <main class="max-w-7xl mx-auto px-6 mt-12 space-y-20">
 
         <section>
-            <div class="flex items-center space-x-3 mb-6">
-                <i class="fas fa-list text-slate-400 text-xl"></i>
-                <h3 class="text-xl font-bold uppercase tracking-widest text-white">Consolidated Performance Metrics</h3>
+            <div class="flex items-center space-x-4 mb-10">
+                <div class="bg-purple-600/20 p-4 rounded-2xl border border-purple-500/30">
+                    <i class="fas fa-dice text-purple-400 text-2xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-3xl font-bold uppercase tracking-wider">Casino Vertical</h2>
+                </div>
             </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+                <div class="glass-card p-6 rounded-2xl border-l-4 border-purple-500">
+                    <p class="text-slate-500 text-xs uppercase font-bold tracking-widest">Impressions</p>
+                    <p class="text-3xl font-bold mt-1 text-white">81,208</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl">
+                    <p class="text-slate-500 text-xs uppercase font-bold tracking-widest">Signups (Lead)</p>
+                    <p class="text-3xl font-bold mt-1 text-white">194</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl">
+                    <p class="text-slate-500 text-xs uppercase font-bold tracking-widest">Total FTDs</p>
+                    <p class="text-3xl font-bold mt-1 text-white">14</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl">
+                    <p class="text-slate-500 text-xs uppercase font-bold tracking-widest">Avg. Conv Rate</p>
+                    <p class="text-3xl font-bold mt-1 text-white">24.42%</p>
+                </div>
+            </div>
+
+            <div class="space-y-8 relative">
+                <div class="absolute left-6 top-4 bottom-4 w-px bg-slate-800"></div>
+                <div class="relative pl-16"><div class="absolute left-[20px] top-2 w-2 h-2 rounded-full bg-purple-500"></div><h3 class="text-lg font-bold text-slate-200">SEPTEMBER: IMPLEMENTATION</h3><p class="text-slate-400 mt-1">Dual-campaign per state (MI, NJ, WV, PA) targeting Generic and Slots/Spins. Focused on keyword pruning and initial CPA optimization.</p></div>
+                <div class="relative pl-16"><div class="absolute left-[20px] top-2 w-2 h-2 rounded-full bg-purple-500"></div><h3 class="text-lg font-bold text-slate-200">OCTOBER: OPTIMIZATION</h3><p class="text-slate-400 mt-1">Paused WV due to high spend/low return. Expanded MI, NJ, and PA with generic terms, removing bonus-intent keywords to improve lead quality.</p></div>
+                <div class="relative pl-16"><div class="absolute left-[20px] top-2 w-2 h-2 rounded-full bg-purple-500"></div><h3 class="text-lg font-bold text-slate-200">NOVEMBER: BUDGET REALLOCATION</h3><p class="text-slate-400 mt-1">Daily budget capped at €300. Paused "Free Spins" and "No Deposit" keywords to test FTD behavior and acquisition efficiency.</p></div>
+                <div class="relative pl-16"><div class="absolute left-[20px] top-2 w-2 h-2 rounded-full bg-blue-400"></div><h3 class="text-lg font-bold text-blue-400 uppercase">DECEMBER (1-15): LEAD GEN PILOT</h3><p class="text-slate-400 mt-1">Development of a Landing Page Lead Gen system. Strategy focuses on building a CRM database with recurring brand offers via email.</p></div>
+            </div>
+        </section>
+
+        <section>
+            <div class="flex items-center space-x-4 mb-8">
+                <div class="bg-blue-600/20 p-4 rounded-2xl border border-blue-500/30">
+                    <i class="fas fa-football-ball text-blue-400 text-2xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-3xl font-bold uppercase tracking-wider">Sportsbook Vertical</h2>
+                </div>
+            </div>
+
+            <div class="glass-card p-8 rounded-3xl border-l-4 border-blue-500">
+                <h3 class="text-xl font-bold mb-4 uppercase">December (1-15): Market Launch</h3>
+                <p class="text-slate-400 leading-relaxed mb-6">Initiated three specialized campaigns (Sports Generic, Welcome Bonus, and How-to Guides) targeting IN, MI, NJ, PA, TN, and VA. Currently in the <strong>Learning Phase</strong>.</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="p-4 bg-white/5 rounded-xl text-center"><p class="text-xs text-slate-500 uppercase">Impressions</p><p class="text-xl font-bold text-white">956</p></div>
+                    <div class="p-4 bg-white/5 rounded-xl text-center"><p class="text-xs text-slate-500 uppercase">CTR</p><p class="text-xl font-bold text-white">9.10%</p></div>
+                    <div class="p-4 bg-white/5 rounded-xl text-center"><p class="text-xs text-slate-500 uppercase">Spend</p><p class="text-xl font-bold text-white">$418.71</p></div>
+                    <div class="p-4 bg-white/5 rounded-xl text-center"><p class="text-xs text-slate-500 uppercase">Status</p><p class="text-xl font-bold text-blue-400">Active</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pb-20">
+            <h3 class="text-xl font-bold uppercase tracking-widest text-slate-500 mb-8">Consolidated Performance Data</h3>
             
-            <div class="overflow-x-auto rounded-xl border border-slate-800 shadow-xl">
-                <table class="w-full text-left border-collapse bg-slate-900/40">
+            <div class="overflow-x-auto rounded-xl border border-slate-800">
+                <table class="w-full text-left border-collapse">
                     <thead>
-                        <tr class="bg-slate-800 text-slate-200 text-[11px] uppercase font-bold tracking-widest border-b border-slate-700">
-                            <th class="p-4">Vertical</th>
-                            <th class="p-4">Month</th>
-                            <th class="p-4 text-right">Impressions</th>
-                            <th class="p-4 text-right">CTR</th>
-                            <th class="p-4 text-right">Cost</th>
-                            <th class="p-4 text-right">Conv Rate</th>
-                            <th class="p-4 text-right">Signups</th>
-                            <th class="p-4 text-right">CPL</th>
-                            <th class="p-4 text-right">FTDs</th>
-                            <th class="p-4 text-right">CPA</th>
+                        <tr class="bg-slate-800 text-slate-300 text-[11px] uppercase tracking-[0.15em] font-bold">
+                            <th class="p-4 border-b border-slate-700">Vertical</th>
+                            <th class="p-4 border-b border-slate-700">Month</th>
+                            <th class="p-4 border-b border-slate-700 text-right">Impressions</th>
+                            <th class="p-4 border-b border-slate-700 text-right">Clicks</th>
+                            <th class="p-4 border-b border-slate-700 text-right">CTR</th>
+                            <th class="p-4 border-b border-slate-700 text-right">Cost</th>
+                            <th class="p-4 border-b border-slate-700 text-right">Conv. Rate</th>
+                            <th class="p-4 border-b border-slate-700 text-right">Signups</th>
+                            <th class="p-4 border-b border-slate-700 text-right">CPL</th>
+                            <th class="p-4 border-b border-slate-700 text-right">FTDs</th>
+                            <th class="p-4 border-b border-slate-700 text-right">CPA</th>
                         </tr>
                     </thead>
-                    <tbody class="text-[13px] text-slate-300 divide-y divide-slate-800">
+                    <tbody class="text-sm divide-y divide-slate-800 text-slate-300">
                         <tr class="hover:bg-white/5 transition-colors">
-                            <td class="p-4 font-semibold">Casino</td>
+                            <td class="p-4 font-semibold uppercase text-xs">Casino</td>
                             <td class="p-4">September</td>
                             <td class="p-4 text-right font-mono">42,458</td>
+                            <td class="p-4 text-right font-mono">3,495</td>
                             <td class="p-4 text-right font-mono">8.23%</td>
                             <td class="p-4 text-right font-mono">$8,937.45</td>
                             <td class="p-4 text-right font-mono">24.99%</td>
                             <td class="p-4 text-right font-mono">83</td>
                             <td class="p-4 text-right font-mono">$107.68</td>
-                            <td class="p-4 text-right font-mono font-bold">4</td>
+                            <td class="p-4 text-right font-mono">4</td>
                             <td class="p-4 text-right font-mono">$2,234.36</td>
                         </tr>
                         <tr class="hover:bg-white/5 transition-colors">
-                            <td class="p-4 font-semibold">Casino</td>
+                            <td class="p-4 font-semibold uppercase text-xs">Casino</td>
                             <td class="p-4">October</td>
                             <td class="p-4 text-right font-mono">22,864</td>
+                            <td class="p-4 text-right font-mono">3,407</td>
                             <td class="p-4 text-right font-mono">14.90%</td>
                             <td class="p-4 text-right font-mono">$8,704.96</td>
                             <td class="p-4 text-right font-mono">34.97%</td>
                             <td class="p-4 text-right font-mono">104</td>
                             <td class="p-4 text-right font-mono">$83.70</td>
-                            <td class="p-4 text-right font-mono font-bold">5</td>
+                            <td class="p-4 text-right font-mono">5</td>
                             <td class="p-4 text-right font-mono">$1,740.99</td>
                         </tr>
                         <tr class="hover:bg-white/5 transition-colors">
-                            <td class="p-4 font-semibold">Casino</td>
+                            <td class="p-4 font-semibold uppercase text-xs">Casino</td>
                             <td class="p-4">November</td>
                             <td class="p-4 text-right font-mono">6,394</td>
+                            <td class="p-4 text-right font-mono">1,041</td>
                             <td class="p-4 text-right font-mono">16.28%</td>
                             <td class="p-4 text-right font-mono">$2,392.09</td>
                             <td class="p-4 text-right font-mono">18.25%</td>
                             <td class="p-4 text-right font-mono">2</td>
                             <td class="p-4 text-right font-mono">$1,196.05</td>
-                            <td class="p-4 text-right font-mono font-bold">4</td>
+                            <td class="p-4 text-right font-mono">4</td>
                             <td class="p-4 text-right font-mono">$598.02</td>
                         </tr>
                         <tr class="hover:bg-white/5 transition-colors">
-                            <td class="p-4 font-semibold">Casino</td>
-                            <td class="p-4 font-semibold italic text-slate-100 uppercase">Dec (1-15)</td>
+                            <td class="p-4 font-semibold uppercase text-xs">Casino</td>
+                            <td class="p-4 italic">Dec (1-15)</td>
                             <td class="p-4 text-right font-mono">9,492</td>
+                            <td class="p-4 text-right font-mono">1,381</td>
                             <td class="p-4 text-right font-mono">14.55%</td>
                             <td class="p-4 text-right font-mono">$4,240.67</td>
                             <td class="p-4 text-right font-mono">19.48%</td>
                             <td class="p-4 text-right font-mono">5</td>
                             <td class="p-4 text-right font-mono">$848.13</td>
-                            <td class="p-4 text-right font-mono font-bold">1</td>
+                            <td class="p-4 text-right font-mono">1</td>
                             <td class="p-4 text-right font-mono">$4,240.67</td>
                         </tr>
-                        <tr class="hover:bg-white/5 transition-colors">
-                            <td class="p-4 font-semibold">Sportsbook</td>
-                            <td class="p-4 font-semibold italic text-slate-100 uppercase">Dec (1-15)</td>
+                        <tr class="hover:bg-white/5 transition-colors border-t border-slate-700">
+                            <td class="p-4 font-semibold uppercase text-xs">Sportsbook</td>
+                            <td class="p-4 italic">Dec (1-15)</td>
                             <td class="p-4 text-right font-mono">956</td>
+                            <td class="p-4 text-right font-mono">87</td>
                             <td class="p-4 text-right font-mono">9.10%</td>
                             <td class="p-4 text-right font-mono">$418.71</td>
                             <td class="p-4 text-right font-mono">2.30%</td>
                             <td class="p-4 text-right font-mono">0</td>
                             <td class="p-4 text-right font-mono">—</td>
-                            <td class="p-4 text-right font-mono font-bold">0</td>
+                            <td class="p-4 text-right font-mono">0</td>
                             <td class="p-4 text-right font-mono">—</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            
-            <div class="mt-4 p-4 border border-slate-800 rounded-lg text-xs text-slate-500 italic">
-                Note: December data includes metrics only from the first 15 days of the month. Comparisons to full calendar months should be adjusted for proportionality.
-            </div>
+            <p class="mt-4 text-[10px] text-slate-500 uppercase tracking-widest">Note: December data represents 50% of the month. All financial values in USD.</p>
         </section>
 
     </main>
 
-    <footer class="text-center p-12 text-slate-600 text-[10px] tracking-widest uppercase border-t border-slate-800 mt-10">
-        Marketing Data Management &bull; Proprietary & Confidential
+    <footer class="p-12 text-center text-slate-600 text-[10px] tracking-widest uppercase border-t border-slate-800">
+        Proprietary Marketing Analysis Framework &bull; 2025
     </footer>
 
 </body>
