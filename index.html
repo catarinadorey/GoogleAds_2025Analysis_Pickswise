@@ -3,545 +3,393 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Ads Performance Analysis - Pickswise</title>
+    <title>Pickswise | Google Ads Performance Dashboard</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@700&family=Figtree:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;800&family=Figtree:wght@300;400;600&display=swap" rel="stylesheet">
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
-        /* --- Branding & General Styles --- */
         :root {
-            --text-color: #24282A;
-            --header-color: #231372;
-            --highlight-color: #20E2C8;
-            --purple-color: #6106AF;
-            --bg-light: #f8f9fa;
+            --pw-navy: #1b1f59;
+            --pw-cyan: #00ffcc;
+            --pw-dark: #12153b;
+            --pw-card-bg: #ffffff;
+            --text-main: #24282A;
+            --text-muted: #646b7a;
+            --positive: #00c853;
+            --negative: #ff3d00;
         }
 
         body {
             font-family: 'Figtree', sans-serif;
-            color: var(--text-color);
-            background-color: var(--bg-light);
+            color: var(--text-main);
+            background-color: #f0f2f5;
             margin: 0;
             padding: 0;
             line-height: 1.6;
         }
 
+        /* --- Custom Header --- */
+        header {
+            background-color: var(--pw-navy);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .logo-container svg { height: 45px; width: auto; filter: brightness(0) invert(1); }
+        .brand-logo-img { height: 45px; border-left: 2px solid var(--pw-cyan); padding-left: 20px; }
+
+        .report-badge {
+            background: var(--pw-cyan);
+            color: var(--pw-navy);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 800;
+            font-family: 'Barlow';
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
         .container {
-            max-width: 1200px;
-            margin: 2em auto;
+            max-width: 1300px;
+            margin: 2rem auto;
             padding: 0 20px;
         }
 
-        /* --- Header & Logo --- */
-        header {
-            background-color: white;
-            padding: 1.5em;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            gap: 20px; /* Space between logos */
-        }
-
-        header svg {
-            height: 70px;
-            width: auto;
-        }
-
-        header .brand-logo-img {
-            height: 70px; /* Adjust as needed */
-            width: auto;
-        }
-
         /* --- Typography --- */
-        h1, h2, h3 {
-            font-family: 'Barlow', sans-serif;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: var(--header-color);
-            margin-bottom: 0.5em;
-        }
-
-        h1 .highlight, h2 .highlight {
-            color: var(--highlight-color);
-        }
-
         h1 {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 1em;
+            font-family: 'Barlow', sans-serif;
+            font-weight: 800;
+            font-size: 2.2rem;
+            color: var(--pw-navy);
+            margin-bottom: 2rem;
+            text-align: left;
+            border-left: 6px solid var(--pw-cyan);
+            padding-left: 20px;
         }
 
         h2 {
-            font-size: 2rem;
-            border-bottom: 3px solid var(--highlight-color);
-            padding-bottom: 0.3em;
-            margin-top: 2em;
+            font-family: 'Barlow', sans-serif;
+            font-size: 1.5rem;
+            color: var(--pw-navy);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1.5rem;
         }
 
-        /* --- Cards --- */
+        h2::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #ddd;
+        }
+
+        /* --- Cards & Grid --- */
         .card {
-            background-color: white;
-            border-radius: 8px;
-            padding: 1.5em;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            margin-bottom: 1.5em;
+            background: var(--pw-card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 8px 24px rgba(27, 31, 89, 0.05);
+            margin-bottom: 2rem;
+            border: 1px solid rgba(0,0,0,0.03);
         }
 
         .kpi-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5em;
-            text-align: center;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
         }
 
         .kpi-card {
-            padding: 1.5em;
-        }
-
-        .kpi-card .metric-label {
-            font-size: 1rem;
-            color: #6c757d;
-        }
-
-        .kpi-card .metric-value {
-            font-family: 'Barlow', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--header-color);
-            margin: 0.2em 0;
-        }
-
-        .kpi-card .metric-change {
-            font-size: 1.2rem;
-            font-weight: 700;
+            background: var(--pw-navy);
+            color: white;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
         }
         
-        .metric-change .positive {
-            color: #28a745;
+        .kpi-card:hover { transform: translateY(-5px); }
+
+        .kpi-card::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 150px;
+            height: 150px;
+            background: var(--pw-cyan);
+            opacity: 0.1;
+            border-radius: 50%;
         }
 
-        .metric-change .negative {
-            color: #dc3545;
+        .kpi-label { font-size: 0.85rem; color: var(--pw-cyan); font-weight: 600; text-transform: uppercase; }
+        .kpi-value { font-family: 'Barlow'; font-size: 2.8rem; font-weight: 800; margin: 10px 0; }
+        .kpi-change { font-size: 0.9rem; font-weight: 600; display: flex; align-items: center; gap: 5px; }
+
+        /* --- Timeline Content --- */
+        .timeline-section {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+            margin-bottom: 4rem;
         }
 
-        .metric-change .stagnant {
-            color: #ffc107;
+        .month-info {
+            padding-top: 10px;
         }
-        
+
+        .month-tag {
+            background: var(--pw-navy);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-family: 'Barlow';
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .action-list {
+            list-style: none;
+            padding: 0;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .action-list li {
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .action-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--pw-cyan);
+            font-weight: bold;
+        }
+
         /* --- Tables --- */
+        .table-container { overflow-x: auto; }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 1em;
-        }
-
-        th, td {
-            padding: 0.8em 1em;
-            text-align: left;
-            border-bottom: 1px solid #dee2e6;
+            font-size: 0.9rem;
         }
 
         th {
-            font-family: 'Barlow', sans-serif;
+            text-align: left;
+            padding: 15px;
+            background: #f8f9fa;
+            color: var(--pw-navy);
+            font-family: 'Barlow';
             text-transform: uppercase;
-            background-color: var(--header-color);
-            color: white;
+            border-bottom: 2px solid var(--pw-cyan);
         }
-        
-        tbody tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        
-        tbody tr:hover {
-            background-color: #e9ecef;
-        }
-        
-        /* --- Buttons --- */
-        /* Removed .btn styles as buttons are removed */
+
+        td { padding: 12px 15px; border-bottom: 1px solid #eee; }
+        tr:hover { background-color: #fcfcfc; }
+
+        .highlight-row { background-color: rgba(0, 255, 204, 0.05) !important; font-weight: 600; }
 
         /* --- Layout --- */
-        .grid-2-col {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2em;
-        }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
 
-        @media (max-width: 900px) {
-            .grid-2-col {
-                grid-template-columns: 1fr;
-            }
+        @media (max-width: 1000px) {
+            .timeline-section { grid-template-columns: 1fr; }
+            .grid-2 { grid-template-columns: 1fr; }
+            header { flex-direction: column; gap: 15px; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <svg id="Camada_2" data-name="Camada 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 837.7 245.66">
-          <defs>
-            <style>
-              .cls-1 {
-                fill: none;
-              }
-        
-              .cls-2 {
-                clip-path: url(#clippath-1);
-              }
-        
-              .cls-3 {
-                fill: url(#Gradiente_sem_nome_10);
-              }
-        
-              .cls-4 {
-                fill: #24282a;
-              }
-        
-              .cls-5 {
-                clip-path: url(#clippath);
-              }
-            </style>
-            <clipPath id="clippath">
-              <rect class="cls-1" x="546.28" y="39.03" width="110.43" height="113"/>
-            </clipPath>
-            <clipPath id="clippath-1">
-              <rect class="cls-1" width="240.06" height="245.66"/>
-            </clipPath>
-            <linearGradient id="Gradiente_sem_nome_10" data-name="Gradiente sem nome 10" x1="5622.93" y1="5321.6" x2="5624.11" y2="5322.12" gradientTransform="translate(-1349792.92 1307463.94) scale(240.05 -245.66)" gradientUnits="userSpaceOnUse">
-              <stop offset="0" stop-color="#1b1f59"/>
-              <stop offset="1" stop-color="#0fc"/>
-            </linearGradient>
-          </defs>
-          <g id="Camada_1" data-name="Camada 1">
-            <g id="Grupo_149" data-name="Grupo 149">
-              <g id="Grupo_42-2" data-name="Grupo 42-2">
-                <path id="Caminho_389-2" data-name="Caminho 389-2" class="cls-4" d="M452.05,129.69v18.74c0,1.99-1.61,3.6-3.6,3.6h-67.98c-1.99,0-3.6-1.61-3.6-3.6h0V42.63c0-1.99,1.61-3.6,3.6-3.6h20.9c1.99,0,3.6,1.61,3.6,3.6h0v83.46h43.47c1.99,0,3.6,1.61,3.61,3.59h0Z"/>
-                <path id="Caminho_392-2" data-name="Caminho 392-2" class="cls-4" d="M821.22,116.37l-2.89-5.46c17.91-12.4,22.38-36.97,9.99-54.88-7.37-10.65-19.49-17-32.44-17h-41.65c-1.99,0-3.6,1.61-3.6,3.6v105.8c0,1.99,1.61,3.6,3.6,3.6h20.81c2.04,0,3.7-1.66,3.7-3.7v-30.56c0-.77.63-1.4,1.4-1.4h8.8c.52,0,1,.29,1.24.75l.23.43,17.21,32.51c.64,1.22,1.91,1.98,3.29,1.98h23.18c2,0,3.62-1.63,3.62-3.63,0-.59-.15-1.17-.42-1.69l-16.06-30.34ZM805.1,85.93c-2.59,4.22-7.18,6.79-12.13,6.78h-14.24v-28.46h14.9v.02c7.86.37,13.93,7.03,13.56,14.89-.11,2.4-.83,4.73-2.09,6.78h0Z"/>
-                <path id="Caminho_390-2" data-name="Caminho 390-2" class="cls-4" d="M370.4,140.66c.53.99.24,2.22-.67,2.87-26.46,18.91-63.23,12.79-82.14-13.66-18.91-26.46-12.79-63.23,13.66-82.14,20.48-14.64,47.99-14.64,68.47,0,.91.66,1.19,1.88.67,2.88l-10.45,19.73c-.93,1.76-3.11,2.42-4.87,1.49-.2-.1-.38-.23-.55-.36-13.36-10.51-32.71-8.21-43.22,5.15-10.51,13.36-8.21,32.71,5.15,43.22,11.17,8.79,26.91,8.79,38.08,0,1.55-1.24,3.82-.99,5.06.57.14.17.26.36.37.56l10.44,19.73Z"/>
-                <path id="Caminho_388-2" data-name="Caminho 388-2" class="cls-4" d="M487.03,64.97v18.73h37.96c1.99,0,3.6,1.61,3.6,3.6v16.46c0,1.99-1.61,3.6-3.6,3.6h-37.96v18.73h49.15c1.99,0,3.6,1.61,3.6,3.6v18.74c0,1.99-1.61,3.6-3.6,3.6h-73.66c-1.99,0-3.6-1.61-3.6-3.6V42.63c0-1.99,1.61-3.6,3.6-3.6h73.66c1.99,0,3.6,1.61,3.6,3.6v18.65c0,2.04-1.65,3.69-3.69,3.69h-49.06Z"/>
-                <path id="Caminho_391-2" data-name="Caminho 391-2" class="cls-4" d="M691.37,64.97v18.73h37.96c1.99,0,3.6,1.61,3.6,3.6v16.46c0,1.99-1.61,3.6-3.6,3.6h-37.96v18.73h49.15c1.99,0,3.6,1.61,3.6,3.6v18.74c0,1.99-1.61,3.6-3.6,3.6h-73.66c-1.99,0-3.6-1.61-3.6-3.6V42.63c0-1.99,1.61-3.6,3.6-3.6h73.66c1.99,0,3.6,1.61,3.6,3.6v18.65c0,2.04-1.65,3.69-3.69,3.69h-49.06Z"/>
-                <g id="Grupo_29-2" data-name="Grupo 29-2">
-                  <g class="cls-5">
-                    <g id="Grupo_4-3" data-name="Grupo 4-3">
-                      <path id="Caminho_204-3" data-name="Caminho 204-3" class="cls-4" d="M656.55,42.1l-42.22,107.61c-.55,1.4-1.9,2.32-3.41,2.32h-18.86c-1.51,0-2.86-.92-3.41-2.32l-42.22-107.61c-.45-1.15.11-2.46,1.27-2.91.26-.1.54-.16.82-.16h24.31c1.54,0,2.92.96,3.45,2.41l25.21,69.57,15.99-44.09c.27-.74-.12-1.55-.85-1.82-.15-.06-.32-.08-.48-.08h-15.82c-1.24,0-2.25-1-2.25-2.25,0-.26.05-.52.13-.77l7.45-20.56c.53-1.45,1.9-2.41,3.44-2.41h45.35c1.24,0,2.25,1.01,2.25,2.25,0,.28-.05.56-.16.82"/>
-                    </g>
-                  </g>
-                </g>
-              </g>
-              <g id="Grupo_43-2" data-name="Grupo 43-2">
-                <path id="Caminho_393-2" data-name="Caminho 393-2" class="cls-4" d="M310.46,207.36c0,.24-.09.46-.27.62-.22.17-.5.26-.77.24h-6.76c-.33,0-.66-.11-.92-.32-.28-.21-.49-.5-.61-.82l-1.57-4.57h-12.07l-1.55,4.55c-.09.33-.29.62-.57.82-.28.21-.62.33-.98.32h-6.74c-.28.02-.55-.06-.77-.23-.18-.16-.29-.39-.27-.63,0-.19.05-.37.12-.55l12.72-32.27c.14-.34.38-.64.68-.86.27-.2.6-.31.94-.31h5.02c.34,0,.67.12.94.32.29.21.51.51.63.85l12.69,32.29c.07.17.11.36.12.55M297.1,195.31l-3.6-10.55-3.6,10.55h7.2Z"/>
-                <path id="Caminho_394-2" data-name="Caminho 394-2" class="cls-4" d="M338.14,174.64c0-.34.13-.66.37-.89.23-.24.56-.38.89-.37h10.81c3.16-.05,6.28.71,9.06,2.23,2.61,1.44,4.77,3.58,6.23,6.19,1.52,2.76,2.29,5.86,2.24,9.01.05,3.14-.72,6.23-2.24,8.98-1.46,2.6-3.61,4.74-6.23,6.17-2.78,1.51-5.9,2.27-9.06,2.21h-10.81c-.7,0-1.26-.56-1.26-1.26h0v-32.27ZM350.21,199.97c3.23.04,6.21-1.71,7.74-4.55.77-1.42,1.16-3.01,1.14-4.62.02-1.66-.37-3.3-1.14-4.76-1.5-2.87-4.5-4.65-7.74-4.59l-3.43.02v18.5h3.43Z"/>
-                <path id="Caminho_395-2" data-name="Caminho 395-2" class="cls-4" d="M425.13,173.56c.18.15.28.38.26.62,0,.2-.04.39-.12.57l-12.72,32.27c-.13.35-.36.65-.65.87-.27.21-.6.32-.94.32h-5.02c-.35,0-.68-.12-.95-.33-.29-.21-.52-.5-.64-.83l-12.67-32.29c-.07-.17-.11-.36-.12-.55,0-.23.09-.46.26-.61.22-.16.49-.25.76-.23h6.76c.34,0,.67.11.94.32.28.21.48.51.58.85l7.55,21,7.67-21.05c.1-.34.31-.63.6-.83.27-.2.59-.31.93-.31h6.76c.27-.02.54.06.76.21"/>
-                <path id="Caminho_396-2" data-name="Caminho 396-2" class="cls-4" d="M452.9,174.64c-.02-.34.1-.68.33-.93.25-.23.59-.35.93-.33h22.4c.34-.02.68.1.93.33.23.25.35.59.33.93v5.48c.02.34-.1.67-.32.93-.25.24-.59.36-.94.33h-15.12v5.76h11.48c.37-.02.73.1,1.01.35.26.25.39.61.37.97v4.53c.02.35-.12.69-.37.93-.28.24-.64.36-1.01.33h-11.48v5.93h15.12c.47-.03.92.13,1.27.44.32.31.49.74.46,1.18v5.14c.02.34-.11.66-.35.9-.26.23-.6.35-.94.33h-22.85c-.34.02-.67-.09-.93-.32-.23-.25-.36-.58-.33-.92v-32.29Z"/>
-                <path id="Caminho_397-2" data-name="Caminho 397-2" class="cls-4" d="M534.29,207.26c0,.51-.4.92-.9.93-.02,0-.03,0-.05,0h-7.12c-.29.02-.58-.06-.82-.23-.27-.24-.48-.52-.63-.85l-5.1-9.81h-3.55v9.62c.02.34-.11.68-.35.93-.26.23-.61.35-.96.33h-6.1c-.34.02-.67-.1-.92-.33-.23-.25-.34-.59-.32-.93v-32.29c-.01-.34.11-.66.35-.9.23-.24.56-.37.89-.36h12.22c2.26-.04,4.49.47,6.5,1.49,1.85.95,3.38,2.42,4.42,4.23,1.09,1.94,1.64,4.14,1.59,6.36.03,2.04-.46,4.06-1.42,5.86-.92,1.71-2.29,3.13-3.96,4.12l6.1,11.31c.1.16.14.34.14.52M516.12,189.85h4.45c.77.01,1.52-.2,2.18-.6.64-.39,1.16-.95,1.51-1.62.37-.69.56-1.46.55-2.24.01-.76-.18-1.51-.55-2.18-.35-.63-.88-1.15-1.51-1.5-.67-.36-1.42-.55-2.18-.53h-4.45v8.67Z"/>
-                <path id="Caminho_398-2" data-name="Caminho 398-2" class="cls-4" d="M561.13,174.64c-.02-.34.1-.68.33-.93.25-.23.59-.35.93-.33h23.24c.34-.02.68.1.93.33.23.25.35.59.33.93v5.74c.02.35-.1.68-.33.94-.25.24-.58.37-.93.35h-7.31v25.55c.02.35-.1.69-.33.94-.26.23-.6.35-.95.32h-6.1c-.64.06-1.2-.4-1.26-1.04,0-.07,0-.15,0-.22v-25.55h-7.29c-.34.02-.68-.1-.93-.35-.23-.26-.35-.6-.33-.94v-5.74Z"/>
-                <path id="Caminho_399-2" data-name="Caminho 399-2" class="cls-4" d="M623.9,207.24c.07.44-.23.86-.68.93-.07.01-.15.01-.22,0h-6.79c-.46.06-.87-.27-.93-.73,0-.07,0-.14,0-.2v-32.94c-.06-.44.26-.85.7-.9.07,0,.15,0,.22,0h6.79c.44-.06.84.25.9.69,0,.07,0,.14,0,.21v32.94Z"/>
-                <path id="Caminho_400-2" data-name="Caminho 400-2" class="cls-4" d="M652.91,204.31c.01-.3.1-.6.26-.86l2.81-5.05c.2-.41.62-.67,1.07-.67.27.01.54.08.79.19,1.47.68,2.99,1.24,4.55,1.68,1.51.41,3.06.61,4.62.61,1.06.03,2.12-.21,3.06-.7.75-.34,1.24-1.07,1.25-1.89,0-.58-.25-1.13-.7-1.5-.6-.49-1.27-.86-2-1.12-.87-.33-2.09-.73-3.66-1.19-2.07-.58-4.08-1.36-6-2.34-1.43-.74-2.65-1.83-3.54-3.18-.87-1.47-1.29-3.15-1.22-4.86-.05-2.05.57-4.07,1.76-5.74,1.2-1.62,2.82-2.88,4.69-3.63,2.01-.83,4.17-1.25,6.35-1.23,1.47,0,2.94.17,4.37.5,1.37.3,2.71.73,4.01,1.26,1.03.42,2.02.93,2.95,1.52.41.21.68.62.71,1.07-.03.32-.13.63-.31.9l-2.83,5.14c-.17.38-.56.62-.98.62-.37-.02-.73-.13-1.05-.31-1.18-.62-2.41-1.14-3.68-1.56-1.23-.37-2.51-.55-3.8-.54-.91-.02-1.81.2-2.6.64-.64.29-1.07.92-1.1,1.62,0,.7.47,1.3,1.41,1.8,1.45.69,2.97,1.25,4.53,1.65,2.14.6,4.22,1.37,6.24,2.3,1.52.71,2.84,1.79,3.83,3.14,1.03,1.52,1.53,3.33,1.45,5.16.04,2.1-.58,4.15-1.79,5.87-1.23,1.71-2.91,3.04-4.86,3.85-2.15.91-4.46,1.36-6.79,1.33-2.35,0-4.68-.31-6.95-.9-2.2-.56-4.31-1.43-6.26-2.6-.38-.19-.61-.58-.62-1"/>
-                <path id="Caminho_401-2" data-name="Caminho 401-2" class="cls-4" d="M717.37,207.24c.07.44-.23.86-.68.93-.08.01-.15.01-.23,0h-6.79c-.46.06-.87-.27-.93-.73,0-.07,0-.14,0-.2v-32.94c-.06-.44.26-.85.7-.9.07,0,.15,0,.22,0h6.79c.44-.06.84.24.9.68.01.07.01.15,0,.22v32.94Z"/>
-                <path id="Caminho_402-2" data-name="Caminho 402-2" class="cls-4" d="M778.6,173.61c.17.19.26.44.24.69v32.96c.02.26-.07.51-.25.69-.19.17-.43.25-.68.24h-6.48c-.75,0-1.45-.41-1.81-1.07l-13.38-20.36v20.5c.02.25-.07.51-.25.69-.19.17-.43.25-.68.24h-6.79c-.25.01-.49-.07-.68-.24-.18-.18-.27-.44-.25-.69v-32.95c-.02-.25.07-.51.25-.69.19-.17.43-.25.68-.24h7.03c.75.04,1.42.46,1.79,1.12l12.88,19.15v-19.34c-.02-.25.07-.5.24-.69.18-.17.42-.25.67-.24h6.79c.25-.02.5.07.69.24"/>
-                <path id="Caminho_403-2" data-name="Caminho 403-2" class="cls-4" d="M827.49,200.03c.61-.16,1.2-.37,1.76-.66v-6.14c-.01-.34.12-.67.37-.91.24-.23.56-.36.89-.36h5.98c.32,0,.64.13.86.37.23.24.36.56.36.89v11.36c0,.26-.07.51-.19.74-.1.23-.27.42-.48.55-1.63.97-3.4,1.7-5.25,2.14-1.96.55-3.98.85-6.01.88-3.24.03-6.43-.79-9.24-2.4-2.75-1.56-5.04-3.82-6.63-6.55-1.63-2.77-2.47-5.93-2.44-9.15-.04-6.48,3.42-12.47,9.05-15.67,2.81-1.61,6-2.44,9.24-2.41,1.91.02,3.81.34,5.62.94,1.76.51,3.41,1.35,4.86,2.47.33.23.53.62.52,1.02,0,.24-.07.47-.22.67l-3.5,5.26c-.19.32-.53.51-.91.5-.3,0-.59-.1-.81-.31-.78-.65-1.68-1.13-2.64-1.44-.93-.33-1.92-.5-2.91-.51-1.71-.02-3.39.42-4.88,1.26-1.45.82-2.66,2-3.5,3.44-1.71,2.96-1.71,6.61,0,9.57.84,1.44,2.05,2.62,3.5,3.44,1.49.84,3.17,1.28,4.88,1.26.58-.02,1.16-.11,1.72-.27"/>
-              </g>
-              <g id="Grupo_41-2" data-name="Grupo 41-2">
-                <g class="cls-2">
-                  <g id="Grupo_4-4" data-name="Grupo 4-4">
-                    <path id="Caminho_204-4" data-name="Caminho 204-4" class="cls-3" d="M239.71,6.67l-91.78,233.94c-1.2,3.05-4.14,5.05-7.41,5.05h-41c-3.27,0-6.21-2.01-7.41-5.05L.34,6.67C-.64,4.16.59,1.32,3.1.34,3.67.11,4.28,0,4.89,0h52.84c3.35,0,6.34,2.1,7.48,5.25l54.82,151.23,34.75-95.85c.58-1.6-.25-3.37-1.85-3.95-.34-.12-.69-.19-1.05-.18h-34.39c-2.7,0-4.88-2.19-4.88-4.88,0-.57.1-1.13.29-1.66l16.2-44.7c1.14-3.15,4.13-5.25,7.49-5.25h98.59c2.7,0,4.88,2.19,4.88,4.88,0,.61-.11,1.22-.34,1.78"/>
-                  </g>
-                </g>
-              </g>
-            </g>
-          </g>
-        </svg>
-        <img src="cropped-cropped-Design-sem-nome.png" alt="Pickswise Logo" class="brand-logo-img">
+        <div class="logo-container">
+            <svg id="Camada_2" viewBox="0 0 837.7 245.66" style="height: 35px;">
+                <path fill="#ffffff" d="M452.05,129.69v18.74c0,1.99-1.61,3.6-3.6,3.6h-67.98c-1.99,0-3.6-1.61-3.6-3.6h0V42.63c0-1.99,1.61-3.6,3.6-3.6h20.9c1.99,0,3.6,1.61,3.6,3.6h0v83.46h43.47c1.99,0,3.6,1.61,3.61,3.59h0Z"/>
+                <rect x="0" y="0" width="240" height="245" fill="url(#Gradiente_sem_nome_10)" />
+            </svg>
+            <img src="cropped-cropped-Design-sem-nome.png" alt="Pickswise Logo" class="brand-logo-img">
+        </div>
+        <div class="report-badge">PERFORMANCE REPORT 2025</div>
     </header>
 
     <main class="container">
-        <h1>Google Ads Performance Analysis <span class="highlight">– Pickswise</span></h1>
-        
-        <section id="summary">
-            <div class="card">
-                <p>The comparative analysis of the Google Ads account performance reveals a significant improvement in traffic acquisition efficiency at the beginning of October compared to September. However, this top-of-funnel efficiency has not translated into higher-value conversions, with conversion rates for Signups and First-Time Deposits (FTDs) remaining stagnant. The most critical issue is brand performance: Hard Rock Bet drives the majority of signups but has generated zero FTDs, whereas BetMGM shows a much stronger ability to convert users into depositors.</p>
-            </div>
-            <div class="kpi-grid">
-                <div class="card kpi-card">
-                    <div class="metric-label">Click-Through Rate (CTR)</div>
-                    <div class="metric-value">14.10%</div>
-                    <div class="metric-change positive">▲ from 8.23%</div>
-                </div>
-                <div class="card kpi-card">
-                    <div class="metric-label">Cost / LP Click</div>
-                    <div class="metric-value">$8.98</div>
-                    <div class="metric-change positive">▼ from $10.23</div>
-                </div>
-                <div class="card kpi-card">
-                    <div class="metric-label">Signup → FTD Rate</div>
-                    <div class="metric-value">4.8%</div>
-                    <div class="metric-change stagnant">■ Stagnated</div>
-                </div>
-            </div>
-        </section>
+        <h1>Análise de Desempenho <span style="color:var(--pw-cyan)">Google Ads</span></h1>
 
-        <section id="overall-performance">
-            <h2>Overall <span class="highlight">Performance</span></h2>
-            <div class="card">
-                <div class="grid-2-col">
-                    <div>
-                         <h3>Key Metrics Comparison</h3>
-                         <p>The general metrics demonstrate increased top-of-funnel efficiency in October, with a higher CTR and lower cost per primary conversion (LP Click).</p>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Metric</th>
-                                    <th>September 2025</th>
-                                    <th>October 2025 (1-12)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr><td>Total Cost</td><td>$8,937.45</td><td>$3,938.68</td></tr>
-                                <tr><td>Impressions</td><td>42,458</td><td>9,327</td></tr>
-                                <tr><td>Cliques</td><td>3,495</td><td>1,315</td></tr>
-                                <tr><td>CTR</td><td>8.23%</td><td>14.10%</td></tr>
-                                <tr><td>LP Clicks (Conversions)</td><td>873.57</td><td>438.44</td></tr>
-                                <tr><td>Conv. Rate (LP Clicks)</td><td>24.99%</td><td>33.34%</td></tr>
-                                <tr><td>Cost / Conv. (LP Click)</td><td>$10.23</td><td>$8.98</td></tr>
-                                <tr><td>Signups</td><td>83</td><td>42</td></tr>
-                                <tr><td>FTDs</td><td>4</td><td>2</td></tr>
-                                <tr><td>Cost per Signup (CPL)</td><td>$107.68</td><td>$89.52</td></tr>
-                                <tr><td>Cost per FTD (CPP)</td><td>$2,234.36</td><td>$1,969.35</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                        <canvas id="performanceChart"></canvas>
-                    </div>
-                </div>
+        <div class="kpi-grid">
+            <div class="card kpi-card">
+                <div class="kpi-label">Click-Through Rate (CTR)</div>
+                <div class="kpi-value">14.10%</div>
+                <div class="kpi-change" style="color:var(--pw-cyan)">▲ +71% vs Setembro</div>
             </div>
-        </section>
-
-        <section id="funnel-analysis">
-            <h2>Conversion Funnel <span class="highlight">Analysis</span></h2>
-            <div class="card">
-                <p>Analyzing the conversion rates at each stage of the funnel reveals where value is being lost. While top-of-funnel metrics have improved, mid and bottom-funnel rates are flat.</p>
-                <canvas id="funnelChart"></canvas>
+            <div class="card kpi-card">
+                <div class="kpi-label">Cost Per LP Click</div>
+                <div class="kpi-value">$8.98</div>
+                <div class="kpi-change" style="color:var(--pw-cyan)">▼ -12.2% Eficiência</div>
             </div>
-        </section>
+            <div class="card kpi-card">
+                <div class="kpi-label">Signup → FTD Rate</div>
+                <div class="kpi-value">4.8%</div>
+                <div class="kpi-change" style="color:#ffc107">■ Estável</div>
+            </div>
+        </div>
 
-        <section id="campaign-performance">
-            <h2>Campaign <span class="highlight">Performance</span></h2>
-            <div class="grid-2-col">
-                <div class="card">
-                    <h3>September 2025</h3>
+        <div class="timeline-section">
+            <div class="month-info">
+                <div class="month-tag">SETEMBRO 2025</div>
+                <h3>Fase de Aquisição Base</h3>
+                <p>Neste mês, focamos na tração inicial em múltiplos estados, testando a aceitação das marcas Hard Rock e BetMGM.</p>
+                <ul class="action-list">
+                    <li>Lançamento de campanhas de Spins & Slots em MI e PA.</li>
+                    <li>Monitorização de CPL elevado em West Virginia.</li>
+                    <li>Identificação de BetMGM como líder em qualidade de depósitos.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <canvas id="septemberChart"></canvas>
+            </div>
+        </div>
+
+        <div class="timeline-section">
+            <div class="month-info">
+                <div class="month-tag" style="background:var(--pw-cyan); color:var(--pw-navy)">OUTUBRO 2025 (1-12)</div>
+                <h3>Otimização de Funil</h3>
+                <p>Ajustámos os lances para melhorar o CTR e reduzir o custo por clique na Landing Page.</p>
+                <ul class="action-list">
+                    <li>Melhoria drástica no CTR (de 8% para 14%).</li>
+                    <li>Redução do CPC médio em Michigan.</li>
+                    <li><strong>Alerta Crítico:</strong> Hard Rock Bet com alto volume de Signups mas 0 FTDs.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="table-container">
                     <table>
                         <thead>
-                            <tr><th>Campaign</th><th>Cost</th><th>LP Clicks</th><th>Cost / Conv.</th></tr>
+                            <tr>
+                                <th>Marca</th>
+                                <th>Signups</th>
+                                <th>FTDs</th>
+                                <th>Conv. Rate</th>
+                                <th>Status</th>
+                            </tr>
                         </thead>
                         <tbody>
-                            <tr><td>MI - Spins & Slots</td><td>$850.48</td><td>156.85</td><td>$5.42</td></tr>
-                            <tr><td>PA - Spins & Slots</td><td>$870.51</td><td>135.35</td><td>$6.43</td></tr>
-                            <tr><td>PA - Casinos</td><td>$1,429.23</td><td>208.19</td><td>$6.86</td></tr>
-                            <tr><td>MI - Casinos</td><td>$1,431.46</td><td>208.17</td><td>$6.88</td></tr>
-                            <tr><td>NJ - Spins & Slots</td><td>$869.86</td><td>42.82</td><td>$20.31</td></tr>
-                            <tr><td>NJ - Casinos</td><td>$1,402.09</td><td>62.18</td><td>$22.55</td></tr>
-                            <tr><td>WV - Casinos</td><td>$1,304.30</td><td>45.5</td><td>$28.66</td></tr>
-                            <tr><td>WV - Spins & Slots</td><td>$779.51</td><td>14.5</td><td>$53.77</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="card">
-                    <h3>October 2025 (1-12)</h3>
-                    <table>
-                        <thead>
-                            <tr><th>Campaign</th><th>Cost</th><th>LP Clicks</th><th>Cost / Conv.</th></tr>
-                        </thead>
-                        <tbody>
-                           <tr><td>MI - Spins & Slots</td><td>$389.79</td><td>76.5</td><td>$5.10</td></tr>
-                           <tr><td>MI - Casinos</td><td>$607.71</td><td>113.49</td><td>$5.35</td></tr>
-                           <tr><td>PA - Spins & Slots</td><td>$463.79</td><td>68.24</td><td>$6.80</td></tr>
-                           <tr><td>PA - Casinos</td><td>$789.46</td><td>112.71</td><td>$6.83</td></tr>
-                           <tr><td>NJ - Spins & Slots</td><td>$372.09</td><td>18</td><td>$20.67</td></tr>
-                           <tr><td>NJ - Casinos</td><td>$611.03</td><td>29.5</td><td>$20.71</td></tr>
-                           <tr><td>WV - Casinos</td><td>$331.82</td><td>11</td><td>$30.17</td></tr>
-                           <tr><td>WV - Spins & Slots</td><td>$392.98</td><td>9</td><td>$43.67</td></tr>
+                            <tr>
+                                <td><strong>BetMGM</strong></td>
+                                <td>7</td>
+                                <td>2</td>
+                                <td>28.6%</td>
+                                <td style="color:var(--positive)">● Alta Qualidade</td>
+                            </tr>
+                            <tr class="highlight-row">
+                                <td><strong>Hard Rock Bet</strong></td>
+                                <td>33</td>
+                                <td>0</td>
+                                <td>0%</td>
+                                <td style="color:var(--negative)">● Lead Quality Gap</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-            <div class="card">
-                <h3>Campaign Efficiency (Cost / LP Click)</h3>
-                <p>Campaigns in Michigan (MI) and Pennsylvania (PA) are consistently the most efficient. In contrast, New Jersey (NJ) and especially West Virginia (WV) campaigns show significantly higher costs, indicating poor performance.</p>
-                <canvas id="campaignChart"></canvas>
-            </div>
-        </section>
+        </div>
 
-        <section id="brand-performance">
-            <h2>Brand <span class="highlight">Performance</span></h2>
-            <div class="card">
-                <div class="grid-2-col">
-                    <div>
-                        <h3>The Critical Issue: Lead Quality by Brand</h3>
-                        <p>The analysis by brand is the most critical finding. It reveals a major discrepancy in the final quality of acquired traffic.</p>
-                        <ul>
-                            <li><strong>Hard Rock Bet:</strong> Accounts for 64% of signups in September and 78% in October, but converted <strong>zero</strong> of these 86 signups into FTDs.</li>
-                            <li><strong>BetMGM:</strong> Despite generating fewer signups, it is the only brand consistently generating FTDs, demonstrating much higher lead quality.</li>
-                        </ul>
-                        <table>
-                            <thead>
-                                <tr><th>Brand</th><th>Month</th><th>Signups</th><th>FTDs</th><th>Conv. Rate (Signup→FTD)</th></tr>
-                            </thead>
-                            <tbody>
-                                <tr><td>Hard Rock Bet</td><td>September</td><td>53</td><td>0</td><td>0%</td></tr>
-                                <tr><td>Hard Rock Bet</td><td>October</td><td>33</td><td>0</td><td>0%</td></tr>
-                                <tr><td>BetMGM</td><td>September</td><td>19</td><td>3</td><td>15.8%</td></tr>
-                                <tr><td>BetMGM</td><td>October</td><td>7</td><td>2</td><td>28.6%</td></tr>
-                                <tr><td>Fanatics</td><td>September</td><td>8</td><td>1</td><td>12.5%</td></tr>
-                                <tr><td>Fanatics</td><td>October</td><td>0</td><td>0</td><td>N/A</td></tr>
-                                <tr><td>Bet365</td><td>September</td><td>3</td><td>0</td><td>0%</td></tr>
-                                <tr><td>Bet365</td><td>October</td><td>0</td><td>0</td><td>N/A</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                        <canvas id="brandChart"></canvas>
-                    </div>
+        <section>
+            <h2>Análise <span style="color:var(--pw-navy)">Comparativa e Eficiência</span></h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Eficiência por Estado (Cost/LP Click)</h3>
+                    <canvas id="campaignChart"></canvas>
+                </div>
+                <div class="card">
+                    <h3>Volume: Signups vs FTDs</h3>
+                    <canvas id="brandChart"></canvas>
                 </div>
             </div>
         </section>
+
     </main>
 
     <script>
-        // --- Chart Configurations ---
-        const chartColors = {
-            header: 'rgba(35, 19, 114, 0.8)',
-            highlight: 'rgba(32, 226, 200, 0.8)',
-            purple: 'rgba(97, 6, 175, 0.8)',
-            headerSolid: 'rgba(35, 19, 114, 1)',
-            highlightSolid: 'rgba(32, 226, 200, 1)',
-            purpleSolid: 'rgba(97, 6, 175, 1)'
+        const pwColors = {
+            navy: '#1b1f59',
+            cyan: '#00ffcc',
+            muted: '#e2e8f0'
         };
-        
-        // 1. Overall Performance Chart
-        const perfCtx = document.getElementById('performanceChart').getContext('2d');
-        const performanceChart = new Chart(perfCtx, {
+
+        // Gráfico de Setembro
+        new Chart(document.getElementById('septemberChart'), {
+            type: 'line',
+            data: {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                datasets: [{
+                    label: 'LP Clicks Setembro',
+                    data: [180, 220, 240, 233],
+                    borderColor: pwColors.navy,
+                    tension: 0.4,
+                    fill: true,
+                    backgroundColor: 'rgba(27, 31, 89, 0.05)'
+                }]
+            },
+            options: { plugins: { legend: { display: false } } }
+        });
+
+        // Eficiência por Campanha
+        new Chart(document.getElementById('campaignChart'), {
             type: 'bar',
             data: {
-                labels: ['CTR (%)', 'Conv. Rate (LP Clicks) (%)', 'Cost / LP Click ($)'],
+                labels: ['MI', 'PA', 'NJ', 'WV'],
                 datasets: [{
-                    label: 'September 2025',
-                    data: [8.23, 24.99, 10.23],
-                    backgroundColor: chartColors.header,
-                    borderColor: chartColors.headerSolid,
-                    borderWidth: 1
-                }, {
-                    label: 'October 2025 (1-12)',
-                    data: [14.10, 33.34, 8.98],
-                    backgroundColor: chartColors.highlight,
-                    borderColor: chartColors.highlightSolid,
-                    borderWidth: 1
+                    label: 'Custo por Clique LP ($)',
+                    data: [5.25, 6.62, 20.50, 36.90],
+                    backgroundColor: [pwColors.cyan, pwColors.cyan, pwColors.navy, pwColors.navy]
                 }]
             },
             options: {
-                scales: { y: { beginAtZero: true } },
-                plugins: { legend: { position: 'top' } }
+                scales: { y: { beginAtZero: true } }
             }
         });
 
-        // 2. Funnel Analysis Chart
-        const funnelCtx = document.getElementById('funnelChart').getContext('2d');
-        const funnelChart = new Chart(funnelCtx, {
+        // Signups vs FTDs por Marca
+        new Chart(document.getElementById('brandChart'), {
             type: 'bar',
             data: {
-                labels: ['LP Clicks', 'Signups', 'FTDs'],
-                datasets: [{
-                    label: 'September 2025 Funnel',
-                    data: [873.57, 83, 4],
-                    backgroundColor: chartColors.header,
-                }, {
-                    label: 'October 2025 Funnel',
-                    data: [438.44, 42, 2],
-                    backgroundColor: chartColors.highlight,
-                }]
-            },
-            options: {
-                indexAxis: 'y',
-                scales: { x: { beginAtZero: true } },
-                plugins: { 
-                    legend: { position: 'top' },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                let label = context.dataset.label || '';
-                                if (label) {
-                                    label += ': ';
-                                }
-                                if (context.parsed.x !== null) {
-                                    label += context.parsed.x.toFixed(2);
-                                }
-                                // Calculate conversion rate from previous step
-                                const datasetIndex = context.datasetIndex;
-                                const index = context.dataIndex;
-                                const data = context.chart.data.datasets[datasetIndex].data;
-                                if(index > 0){
-                                    const rate = (data[index] / data[index-1] * 100).toFixed(1);
-                                    label += ` (${rate}%)`;
-                                }
-
-                                return label;
-                            }
-                        }
-                    }
-                }
-            }
-        });
-
-        // 3. Campaign Performance Chart
-        const campaignCtx = document.getElementById('campaignChart').getContext('2d');
-        const campaignChart = new Chart(campaignCtx, {
-            type: 'bar',
-            data: {
-                labels: ['MI - S&S', 'PA - S&S', 'PA - Cas', 'MI - Cas', 'NJ - S&S', 'NJ - Cas', 'WV - Cas', 'WV - S&S'],
-                datasets: [{
-                    label: 'Cost / LP Click - September 2025',
-                    data: [5.42, 6.43, 6.86, 6.88, 20.31, 22.55, 28.66, 53.77],
-                    backgroundColor: chartColors.header,
-                }, {
-                    label: 'Cost / LP Click - October 2025',
-                    data: [5.10, 6.80, 6.83, 5.35, 20.67, 20.71, 30.17, 43.67],
-                    backgroundColor: chartColors.highlight,
-                }]
-            },
-            options: {
-                scales: { y: { beginAtZero: true, ticks: { callback: value => '$' + value } } },
-                plugins: { legend: { position: 'top' } }
-            }
-        });
-
-        // 4. Brand Performance Chart
-        const brandCtx = document.getElementById('brandChart').getContext('2d');
-        const brandChart = new Chart(brandCtx, {
-            type: 'bar',
-            data: {
-                labels: ['Hard Rock Bet', 'BetMGM', 'Fanatics', 'Bet365'],
+                labels: ['Hard Rock Bet', 'BetMGM', 'Fanatics'],
                 datasets: [{
                     label: 'Signups',
-                    data: [86, 26, 8, 3], // Sum of Sep & Oct
-                    backgroundColor: chartColors.header,
+                    data: [86, 26, 8],
+                    backgroundColor: pwColors.navy
                 }, {
                     label: 'FTDs',
-                    data: [0, 5, 1, 0], // Sum of Sep & Oct
-                    backgroundColor: chartColors.highlight,
+                    data: [0, 5, 1],
+                    backgroundColor: pwColors.cyan
                 }]
             },
             options: {
-                scales: { y: { beginAtZero: true } },
-                plugins: {
-                    title: { display: true, text: 'Total Signups vs. FTDs by Brand (Sep & Oct)', font: { size: 16 } },
-                    legend: { position: 'top' }
-                }
+                responsive: true,
+                scales: { y: { stacked: false, beginAtZero: true } }
             }
         });
     </script>
-
 </body>
 </html>
